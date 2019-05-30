@@ -1,0 +1,10 @@
+# Configuration file for AFLOW_QE_WORKFLOW
+#
+#------------------------#
+# AFLOW PATH DEFINITIONS #
+#------------------------#
+#
+AFLOW_PATH="/home/rajeshprashanth/devel/"
+AFLOWQE_INSTALL="/home/rajeshprashanth/git_repository/AFLOW_QE_WORKFLOW/"
+export AFLOW_PATH
+export AFLOWQE_INSTALL

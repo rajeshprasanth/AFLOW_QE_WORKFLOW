@@ -1,0 +1,62 @@
+
+&CONTROL
+                       title = 'test.pbe'
+                 calculation = 'scf'
+                restart_mode = 'from_scratch'
+                      outdir = './test.pbe'
+                  pseudo_dir = '/home/rajeshprashanth/pseudo/'
+                     tstress = .true.
+                     tprnfor = .true.
+                   verbosity = 'high'
+               etot_conv_thr = 1.0D-6
+               forc_conv_thr = 1.0D-5
+/
+
+&SYSTEM
+                       ibrav = 0
+                         nat = 12
+                        ntyp = 2
+                        nbnd = 16
+                     ecutwfc = 50
+/
+
+&ELECTRONS
+                    conv_thr = 1.0D-8
+            diago_cg_maxiter = 5000
+            electron_maxstep = 5000
+             diagonalization = 'cg'
+/
+
+&IONS
+                ion_dynamics = 'bfgs'
+/
+
+&CELL
+	                     press = 0.0D0
+              press_conv_thr = 0.1D0
+/
+ATOMIC_SPECIES
+Mg 	 24.305 	 Mg.pbe-mt_fhi.UPF
+Si 	 28.0855 	 Si.pbe-mt_fhi.UPF
+
+ATOMIC_POSITIONS (crystal)
+  Mg      0.75000000000000   0.25000000000000   0.25000000000000  ! // Mg 
+  Mg      0.25000000000000   0.75000000000000   0.25000000000000  ! // Mg 
+  Mg      0.25000000000000   0.25000000000000   0.75000000000000  ! // Mg 
+  Mg      0.75000000000000   0.75000000000000   0.75000000000000  ! // Mg 
+  Mg      0.25000000000000   0.25000000000000   0.25000000000000  ! // Mg 
+  Mg      0.75000000000000   0.75000000000000   0.25000000000000  ! // Mg 
+  Mg      0.75000000000000   0.25000000000000   0.75000000000000  ! // Mg 
+  Mg      0.25000000000000   0.75000000000000   0.75000000000000  ! // Mg 
+  Si     -0.00000000000000   0.00000000000000   0.00000000000000  ! // Si 
+  Si      0.50000000000000   0.50000000000000   0.00000000000000  ! // Si 
+  Si      0.50000000000000   0.00000000000000   0.50000000000000  ! // Si 
+  Si     -0.00000000000000   0.50000000000000   0.50000000000000  ! // Si 
+
+CELL_PARAMETERS (angstrom)
+   6.36517366839618   0.00000000000000   0.00000000000000
+   0.00000000000000   6.36517366839618   0.00000000000000
+   0.00000000000000   0.00000000000000   6.36517366839618
+
+K_POINTS {automatic}
+ 5 5 5 0 0 0
