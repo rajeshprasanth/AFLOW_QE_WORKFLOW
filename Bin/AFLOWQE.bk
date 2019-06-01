@@ -59,28 +59,14 @@ check_args() {
 
 aflow_qe_init() {
   # Generates all files
-  #
-	#----------------------------------------------------------#
-	# Read input POSCAR and rewrite to AFLOW STD POSCAR format #
-	#----------------------------------------------------------#
-	#
   printf "Generating AFLOW customized POSCAR from stdin ..... "
   $AFLOW_PATH/aflow --poscar < $INP_POSCAR > $SYS_NAME.aflow.std_poscar
   printf "Done\n"
   #
-  #--------------------------------------------------------#
-	# Convert aflow.std_poscar to POSCAR (CONVENTIONAL CELL) #
-	#--------------------------------------------------------#
-	# aflow --std_conv | --standard_conventional | --sconv | --sc < POSCAR
-	#
-	printf "Generating AFLOW CONVENTIONAL POSCAR ..... "
+  printf "Generating AFLOW CONVENTIONAL POSCAR ..... "
   #$AFLOW_PATH/aflow --std_conv < $SYS_NAME.aflow.std_poscar > $SYS_NAME.aflow.std_conv_poscar
   $AFLOW_PATH/aflow --poscar < $SYS_NAME.aflow.std_poscar > $SYS_NAME.aflow.std_conv_poscar
-  #-----------------------------------------------------#
-	# Convert aflow.std_poscar to POSCAR (PRIMITIVE CELL) #
-	#-----------------------------------------------------#
-	# aflow --std_prim | --standard_primitive | --sprim | --sp < POSCAR
-
+  
   printf "Done\n"
   printf "Generating AFLOW PRIMITIVE POSCAR ..... "
   $AFLOW_PATH/aflow --std_prim < $SYS_NAME.aflow.std_poscar > $SYS_NAME.aflow.std_prim_poscar

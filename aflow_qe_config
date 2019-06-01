@@ -1,0 +1,10 @@
+# Configuration file for AFLOW_QE_WORKFLOW
+#
+#------------------------#
+# AFLOW PATH DEFINITIONS #
+#------------------------#
+#
+AFLOW_PATH="/usr/share/espresso/aflow/bin"
+AFLOWQE_INSTALL="/home/priyanka/rajeshprashanth/devel/AFLOW_QE_WORKFLOW/"
+export AFLOW_PATH
+export AFLOWQE_INSTALL

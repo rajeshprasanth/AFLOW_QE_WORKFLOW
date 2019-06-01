@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 #
 #
 import sys
@@ -258,4 +258,4 @@ symbol_map = {
 #print (str(sys.argv))
 print ("ATOMIC_SPECIES")
 for i in range(2,len(sys.argv)):
-    print (sys.argv[i],"\t",atom_data[symbol_map[sys.argv[i]]][3],"\t",sys.argv[i]+sys.argv[1])
+    print sys.argv[i],"\t",atom_data[symbol_map[sys.argv[i]]][3],"\t",sys.argv[i]+sys.argv[1]
