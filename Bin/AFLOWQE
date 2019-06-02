@@ -6,10 +6,14 @@
 # Import Configuration file                                #
 #----------------------------------------------------------#
 #
-. ../aflow_qe_config
+mydir=$PWD
+aflow_dir=$0
+cd ../..
+. aflow_qe_config
+cd $mydir
 #
 #----------------------------------------------------------#
-# Read input arguments and export them to variables #
+# Read input arguments and export them to variables        #
 #----------------------------------------------------------#
 #
 INP_POSCAR=$1
@@ -58,8 +62,8 @@ check_args() {
 }
 
 aflow_qe_init() {
-  # Generates all files
-  #
+ 	# Generates all files
+ 	#
 	#----------------------------------------------------------#
 	# Read input POSCAR and rewrite to AFLOW STD POSCAR format #
 	#----------------------------------------------------------#
@@ -73,23 +77,32 @@ aflow_qe_init() {
 	#--------------------------------------------------------#
 	# aflow --std_conv | --standard_conventional | --sconv | --sc < POSCAR
 	#
-	printf "Generating AFLOW CONVENTIONAL POSCAR ..... "
+ 	printf "Generating AFLOW CONVENTIONAL POSCAR ..... "
   #$AFLOW_PATH/aflow --std_conv < $SYS_NAME.aflow.std_poscar > $SYS_NAME.aflow.std_conv_poscar
   $AFLOW_PATH/aflow --poscar < $SYS_NAME.aflow.std_poscar > $SYS_NAME.aflow.std_conv_poscar
+  #
   #-----------------------------------------------------#
 	# Convert aflow.std_poscar to POSCAR (PRIMITIVE CELL) #
 	#-----------------------------------------------------#
 	# aflow --std_prim | --standard_primitive | --sprim | --sp < POSCAR
-
-  printf "Done\n"
+	printf "Done\n"
   printf "Generating AFLOW PRIMITIVE POSCAR ..... "
   $AFLOW_PATH/aflow --std_prim < $SYS_NAME.aflow.std_poscar > $SYS_NAME.aflow.std_prim_poscar
   printf "Done\n"
   #
+  #
+  #---------------------------------------------------------------#
+	# Convert aflow.std_conv_poscar to QE INPUT (CONVENTIONAL CELL) #
+	#---------------------------------------------------------------#
+	# aflow --std_prim | --standard_primitive | --sprim | --sp < POSCAR
   printf "Generating QE CONVENTIONAL FILE ..... "
   $AFLOW_PATH/aflow --qe < $SYS_NAME.aflow.std_conv_poscar > $SYS_NAME.qe.std_conv
   printf "Done\n"
-
+	#
+  #-------------------------------------------------------#
+	# Convert aflow.std_poscar to QE INPUT (PRIMITIVE CELL) #
+	#-------------------------------------------------------#
+	# aflow --std_prim | --standard_primitive | --sprim | --sp < POSCAR
   printf "Generating QE PRIMITIVE FILE ..... "
   $AFLOW_PATH/aflow --qe < $SYS_NAME.aflow.std_prim_poscar > $SYS_NAME.qe.std_prim
   printf "Done\n"
@@ -131,4 +144,4 @@ tweak_qe_inp $SYS_NAME.qe.std_conv > qe_inp/$SYS_NAME.qe.std_conv.in
 echo "`$AFLOW_PATH/aflow --kpoints=1000 < $SYS_NAME.aflow.std_conv_poscar|tail -n 1|gawk -F= {'print $2'}` 0 0 0" >> qe_inp/$SYS_NAME.qe.std_conv.in
 echo "`$AFLOW_PATH/aflow --kpoints=1000 < $SYS_NAME.aflow.std_prim_poscar|tail -n 1|gawk -F= {'print $2'}` 0 0 0" >> qe_inp/$SYS_NAME.qe.std_prim.in
 
-mv *.aflow.* *.qe.* aflowqe_files
+mv *.aflow.* *.qe.* ./aflowqe_files

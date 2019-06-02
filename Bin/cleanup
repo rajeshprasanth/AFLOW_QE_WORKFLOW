@@ -6,5 +6,10 @@
 # Cleanup                                                  #
 #----------------------------------------------------------#
 #
+mydir=$PWD
+aflow_dir=$0
+cd ../..
+. aflow_qe_config
+cd $mydir
 rm -rf *.aflow.* *.qe.* aflowqe_files *qe_inp*
 
